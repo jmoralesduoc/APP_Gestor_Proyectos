@@ -2,8 +2,8 @@
   <ion-toolbar>
     <ion-title>
       Blank 
-      <ion-button [routerLink] ="['/login']">
-        go to Login
+      <ion-button [routerLink]="['/access']">
+        Go to Login
       </ion-button>
     </ion-title>
   </ion-toolbar>
@@ -19,11 +19,12 @@
   <div id="container">
     <strong>Ready to create an app?</strong>
     <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-    <p *ngIf="data.user.usuario">Email: {{ data.user.usuario }}</p>
-
-    <ion-button [routerLink] ="['/login']">
-      go to Login
+    
+    <!-- Verificar si data.user.usuario existe -->
+    <p *ngIf="data?.user?.usuario">Email: {{ data.user.usuario }}</p>
+    
+    <ion-button [routerLink]="['/access']">
+      Go to Login
     </ion-button>
-
   </div>
 </ion-content>

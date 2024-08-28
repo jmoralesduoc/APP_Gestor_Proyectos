@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Project Details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="editProject()">Edit</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ project.name }}</ion-card-title>
+      <ion-card-subtitle>{{ project.dueDate | date }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ project.description }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+    <ion-list-header>Tareas</ion-list-header>
+    <ion-item *ngFor="let task of project.tasks">
+      <ion-label>
+        <h2>{{ task.name }}</h2>
+        <p>{{ task.status }}</p>
+      </ion-label>
+    </ion-item>
+    <ion-button expand="full" (click)="addTask()">Add Task</ion-button>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>Team Members</ion-list-header>
+    <ion-item *ngFor="let member of project.members">
+      <ion-label>
+        <h2>{{ member.name }}</h2>
+        <p>{{ member.role }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

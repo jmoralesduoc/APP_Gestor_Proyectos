@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
   },
   {
@@ -18,6 +18,34 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'registro',
+    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
+  },
+  {
+    path: 'contrasena',
+    loadChildren: () => import('./contrasena/contrasena.module').then( m => m.ContrasenaPageModule)
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule)
+  },
+  {
+    path: 'proyectos',
+    loadChildren: () => import('./proyectos/proyectos.module').then( m => m.ProyectosPageModule)
+  },
+  {
+    path: 'detalle-proyectos',
+    loadChildren: () => import('./detalle-proyectos/detalle-proyectos.module').then( m => m.DetalleProyectosPageModule)
+  },
+  {
+    path: 'perfil-usuario',
+    loadChildren: () => import('./perfil-usuario/perfil-usuario.module').then( m => m.PerfilUsuarioPageModule)
+  },
+  {
+    path: 'configuracion',
+    loadChildren: () => import('./configuracion/configuracion.module').then( m => m.ConfiguracionPageModule)
   },
 ];
 
