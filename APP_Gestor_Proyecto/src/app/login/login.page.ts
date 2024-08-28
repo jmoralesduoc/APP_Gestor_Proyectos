@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
   async onSubmit(){
     try {
       
-      let navigationExtras: NavigationExtras = {
+      const navigationExtras: NavigationExtras = {
         state: {user: this.user}
       };
             
