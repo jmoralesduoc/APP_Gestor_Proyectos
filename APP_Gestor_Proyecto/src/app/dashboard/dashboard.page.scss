@@ -1,0 +1,30 @@
+/* dashboard.page.scss */
+
+/* Estilos para el contenedor de la página */
+.dashboard-container {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Espacio entre las tarjetas */
+  }
+  
+  /* Estilos para las tarjetas */
+  ion-card {
+    border-radius: 10px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra de la tarjeta */
+  }
+  
+  ion-card-img {
+    height: 200px; /* Ajusta la altura de la imagen según sea necesario */
+    object-fit: cover; /* Ajusta la imagen para cubrir el área */
+  }
+  
+  ion-card-content {
+    font-size: 1rem;
+  }
+  
+  ion-img {
+    width: 100%; /* Asegúrate de que la imagen ocupe todo el ancho del contenedor */
+    border-radius: 10px; /* Esquinas redondeadas si es necesario */
+  }
+  
