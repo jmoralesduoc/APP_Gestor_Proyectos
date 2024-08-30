@@ -10,7 +10,7 @@
 
 <ion-content>
   <div class="dashboard-container">
-
+    <ion-button expand="full" color="danger" (click)="logout()">Logout</ion-button>
     <H2> <p *ngIf="data.user.usuario">Bienvenido  {{ data.user.usuario }}</p></H2>
 
     <ion-card>

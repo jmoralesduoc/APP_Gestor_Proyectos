@@ -43,4 +43,8 @@ export class DashboardPage implements OnInit {
   goToProfile() {
     // Lógica para ir al perfil
   }
+
+  logout(){
+    this.router.navigate(['/login']);
+  }
 }
