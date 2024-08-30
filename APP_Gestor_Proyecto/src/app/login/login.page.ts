@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router,NavigationExtras } from '@angular/router';
-
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,41 +8,35 @@ import { Router,NavigationExtras } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  loginForm!: FormGroup;  // Aserción no nula
 
-  user={
-    usuario:"",
-    password:""
+  constructor(private fb: FormBuilder, private router: Router) {}
+
+  ngOnInit() {
+    this.loginForm = this.fb.group({
+      usuario: ['', Validators.required],
+      password: [
+        '', 
+        [
+          Validators.required,
+          Validators.pattern(/^(?=(?:.*\d){4})(?=(?:.*[!@#$%^&*()_+=[\]{};':"\\|,.<>/?`~\-]){3})(?=.*[A-Z]).{8,}$/)
+        ]
+      ]
+    });
   }
 
- 
-  constructor(
-        private router: Router,
-  ) {}
+  get password() {
+    return this.loginForm.get('password');
+  }
 
-  ngOnInit() { }
-
-  async onSubmit(){
-    try {
-      
+  onSubmit() {
+    if (this.loginForm.valid) {
       const navigationExtras: NavigationExtras = {
-        state: {user: this.user}
+        state: { user: this.loginForm.value }
       };
-            
-
-      this.router.navigate(['/home'], navigationExtras);
-    } catch (error) {
-   
-     
+      this.router.navigate(['/dashboard'], navigationExtras);
+    } else {
+      console.log('Login Failed');
     }
-  }
-
-
-
-}
-
-export class LoginComponent{
-  constructor( private router: Router) {}
-  navigate(){
-    this.router.navigate(['/detail'])
   }
 }
