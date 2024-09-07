@@ -7,24 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistroPage implements OnInit {
 
-  name: string;
-  email: string;
-  password: string;
+  constructor() { }
 
-  constructor() {
-    this.name = '';
-    this.email = '';
-    this.password = '';
-  }
-
-  onSubmit() {
-    // Implementar la lógica de envío del formulario de registro.
-  }
-
-  goToLogin() {
-    // Implementar la navegación a la página de inicio de sesión.
-  }
-  
   ngOnInit() {
   }
 
