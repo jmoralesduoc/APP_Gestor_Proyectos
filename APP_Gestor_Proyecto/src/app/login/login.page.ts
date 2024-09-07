@@ -17,16 +17,16 @@ export class LoginPage implements OnInit {
       usuario: ['', Validators.required],
       password: [
         '', 
-        [
-          Validators.required,
-          Validators.pattern(/^(?=(?:.*\d){4})(?=(?:.*[!@#$%^&*()_+=[\]{};':"\\|,.<>/?`~\-]){3})(?=.*[A-Z]).{8,}$/)
+       [
+          Validators.required
+          //Validators.pattern(/^(?=(?:.*\d){4})(?=(?:.*[!@#$%^&*()_+=[\]{};':"\\|,.<>/?`~\-]){3})(?=.*[A-Z]).{8,}$/)
         ]
       ]
     });
   }
 
   get password() {
-    return this.loginForm.get('password');
+    return this.loginForm?.get('password');
   }
 
   onSubmit() {
@@ -39,4 +39,9 @@ export class LoginPage implements OnInit {
       console.log('Login Failed');
     }
   }
+
+  irNuevoUsuario() {
+    this.router.navigate(['/registro']);  
+  }
+
 }
