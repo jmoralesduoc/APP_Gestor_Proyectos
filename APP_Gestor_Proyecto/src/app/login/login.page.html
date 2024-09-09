@@ -1,13 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Login</ion-title>
+    <img src="assets/img/logo.jpeg" alt="Logo" class="logo" />
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Login</ion-title>
+      <h3 class="login-title">Login</h3>
     </ion-toolbar>
   </ion-header>
 
@@ -26,8 +26,14 @@
       <ion-text color="danger">Password debe tener al menos 4 números, 3 caracteres especiales y 1 letra mayúscula.</ion-text>
     </div>
 
+    <mat-spinner *ngIf="isLoading" diameter="40"></mat-spinner>
+
     <ion-button expand="full" type="submit" [disabled]="loginForm.invalid">Login</ion-button>
   </form>
 
   <ion-button  (click)="irNuevoUsuario()">Nuevo Usuario</ion-button>
+  <ion-button  (click)="ir_restablecer()">Restablecer contraseña</ion-button>
+
+
+  
 </ion-content>

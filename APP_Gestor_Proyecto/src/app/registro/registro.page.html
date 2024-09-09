@@ -5,18 +5,17 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" id="registerForm">
     <ion-item>
       <ion-label position="floating">Nombres</ion-label>
-      <ion-input type="nombres" formControlName="nombres"></ion-input>
+      <ion-input type="text" formControlName="nombres"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Apellidos</ion-label>
-      <ion-input type="apellidos" formControlName="apellidos"></ion-input>
+      <ion-input type="text" formControlName="apellidos"></ion-input>
     </ion-item>
 
-   
     <ion-item>
       <ion-label position="floating">Email</ion-label>
       <ion-input type="email" formControlName="email"></ion-input>
@@ -36,8 +35,10 @@
       La contraseña debe tener al menos 8 caracteres, 4 dígitos, 3 caracteres especiales y 1 letra mayúscula.
     </ion-note>
 
-    <ion-button expand="full" type="submit" [disabled]="registerForm?.invalid">
+    <ion-button type="submit" [disabled]="registerForm?.invalid">
       Registrarse
     </ion-button>
+
+    <ion-button color="danger" (click)="logout()">Cancelar</ion-button>
   </form>
 </ion-content>
