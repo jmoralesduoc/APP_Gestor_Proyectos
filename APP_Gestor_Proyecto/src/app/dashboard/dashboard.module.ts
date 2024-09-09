@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DashboardPage } from './dashboard.page';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 
 
 
@@ -16,6 +17,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     IonicModule,
+    FormsModule,
     RouterModule.forChild(routes)
   ],
   declarations: [DashboardPage], // Asegúrate de que el componente está declarado

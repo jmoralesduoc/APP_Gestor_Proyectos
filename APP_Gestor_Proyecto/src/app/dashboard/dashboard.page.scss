@@ -28,3 +28,22 @@
     border-radius: 10px; /* Esquinas redondeadas si es necesario */
   }
   
+
+  ion-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  ion-searchbar {
+    max-width: 400px; // Ajusta según tus necesidades
+  }
+  
+  .logo {
+    max-width: 75px;  // Ajusta el tamaño según sea necesario
+    height: auto;
+    display: block;
+    margin-left: 0;  // Alinea el logo a la izquierda
+    margin-right: auto;  // Opcional: Si deseas que el logo no tenga espacio en el lado derecho
+  }
+

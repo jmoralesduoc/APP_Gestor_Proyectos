@@ -1,20 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { Project } from '..//proyectos/proyectos.module'; // Asegúrate de la ruta correcta
-import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormControl } from '@angular/forms';
+import { AnimationController } from '@ionic/angular';
+import type { Animation } from '@ionic/angular';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: 'dashboard.page.html',
-  styleUrls: ['dashboard.page.scss']
+  templateUrl: './dashboard.page.html',
+  styleUrls: ['./dashboard.page.scss']
 })
 export class DashboardPage implements OnInit {
-  projects: Project[] = [];
+
+  @ViewChild('card', { static: false }) card: ElementRef | undefined;  // Referencia al IonCard
+
+  searchControl = new FormControl('');
+  searchQuery: string = '';
+  allClients: any[] = [];
+  filteredClients: any[] = [];
+  isModalOpen = false;
+  selectedClient: any;
 
   data: any = {};  // Inicializar como un objeto vacío
 
+  private animation!: Animation;
+
   constructor(
     private router: Router,
-    private activeroute: ActivatedRoute
+    private activeroute: ActivatedRoute,
+    private animationCtrl: AnimationController
   ) {
     this.activeroute.queryParams.subscribe(params => {
       const navigation = this.router.getCurrentNavigation();
@@ -29,22 +42,50 @@ export class DashboardPage implements OnInit {
   }
 
   ngOnInit() {
-    // Inicializa proyectos aquí
+    this.allClients = [
+      { name: 'CCU', description: 'assets/img/ccu.png', detalle: 'CCU es una empresa multicategoría...' },
+      { name: 'Coca-Cola', description: 'assets/img/cocacola.png', detalle: 'Somos el embotellador más grande del mundo...' },
+      { name: 'Meta', description: 'assets/img/meta.png', detalle: 'Meta desarrolla tecnologías que ayudan a las personas...' },
+    ];
+    this.filteredClients = [...this.allClients];
+    
   }
 
-  openProject(id: number) {
-    // Lógica para abrir el proyecto
+  ngAfterViewInit() {
+    if (this.card) {  // Asegúrate de que this.card no es undefined
+      this.animation = this.animationCtrl
+        .create()
+        .addElement(this.card.nativeElement)
+        .duration(3000)
+        .iterations(Infinity)
+        .keyframes([
+          { offset: 0, width: '80px' },
+          { offset: 0.72, width: 'var(--width)' },
+          { offset: 1, width: '240px' },
+        ]);
+      
+    }
   }
 
-  createProject() {
-    // Lógica para crear un nuevo proyecto
+  onSearch(event: any) {
+    this.searchQuery = event.detail.value.toLowerCase();
+    this.filteredClients = this.allClients.filter(client =>
+      client.name.toLowerCase().includes(this.searchQuery) ||
+      client.description.toLowerCase().includes(this.searchQuery)
+    );
   }
 
-  goToProfile() {
-    // Lógica para ir al perfil
-  }
-
-  logout(){
+  logout() {
     this.router.navigate(['/login']);
+  }
+
+  openModal(client: any) {
+    this.selectedClient = client;
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+    this.selectedClient = null;
   }
 }
