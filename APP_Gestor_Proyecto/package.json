@@ -65,5 +65,14 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.4.0"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "main": "karma.conf.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmoralesduoc/APP_Gestor_Proyectos.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jmoralesduoc/APP_Gestor_Proyectos/issues"
+  }
 }
