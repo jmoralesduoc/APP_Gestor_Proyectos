@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl } from '@angular/forms';
-import { AnimationController } from '@ionic/angular';
 import type { Animation } from '@ionic/angular';
+import { AnimationController, IonModal } from '@ionic/angular';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +11,7 @@ import type { Animation } from '@ionic/angular';
 })
 export class DashboardPage implements OnInit {
 
-  @ViewChild('card', { static: false }) card: ElementRef | undefined;  // Referencia al IonCard
+  @ViewChild('modal', { static: false }) modal!: IonModal;  // Asegúrate de tener #modal en el HTML
 
   searchControl = new FormControl('');
   searchQuery: string = '';
@@ -20,9 +20,10 @@ export class DashboardPage implements OnInit {
   isModalOpen = false;
   selectedClient: any;
 
-  data: any = {};  // Inicializar como un objeto vacío
+  data: any = {};
 
-  private animation!: Animation;
+  private enterAnimation!: (baseEl: HTMLElement) => Animation;
+  private leaveAnimation!: (baseEl: HTMLElement) => Animation;
 
   constructor(
     private router: Router,
@@ -31,12 +32,8 @@ export class DashboardPage implements OnInit {
   ) {
     this.activeroute.queryParams.subscribe(params => {
       const navigation = this.router.getCurrentNavigation();
-      
       if (navigation && navigation.extras.state && navigation.extras.state) {
         this.data = navigation.extras.state;
-        console.log(this.data.user);
-        console.log(this.data.user.usuario);
-        console.log(this.data.user.password);
       }
     });
   }
@@ -48,23 +45,36 @@ export class DashboardPage implements OnInit {
       { name: 'Meta', description: 'assets/img/meta.png', detalle: 'Meta desarrolla tecnologías que ayudan a las personas...' },
     ];
     this.filteredClients = [...this.allClients];
-    
   }
 
   ngAfterViewInit() {
-    if (this.card) {  // Asegúrate de que this.card no es undefined
-      this.animation = this.animationCtrl
+    this.enterAnimation = (baseEl: HTMLElement) => {
+      const root = baseEl.shadowRoot;
+      const backdropAnimation = this.animationCtrl
         .create()
-        .addElement(this.card.nativeElement)
-        .duration(3000)
-        .iterations(Infinity)
+        .addElement(root!.querySelector('ion-backdrop')!)
+        .fromTo('opacity', '0.01', 'var(--backdrop-opacity)');
+      const wrapperAnimation = this.animationCtrl
+        .create()
+        .addElement(root!.querySelector('.modal-wrapper')!)
         .keyframes([
-          { offset: 0, width: '80px' },
-          { offset: 0.72, width: 'var(--width)' },
-          { offset: 1, width: '240px' },
+          { offset: 0, opacity: '0', transform: 'scale(0)' },
+          { offset: 1, opacity: '0.99', transform: 'scale(1)' },
         ]);
-      
-    }
+      return this.animationCtrl
+        .create()
+        .addElement(baseEl)
+        .easing('ease-out')
+        .duration(500)
+        .addAnimation([backdropAnimation, wrapperAnimation]);
+    };
+
+    this.leaveAnimation = (baseEl: HTMLElement) => {
+      return this.enterAnimation(baseEl).direction('reverse');
+    };
+
+    this.modal.enterAnimation = this.enterAnimation;
+    this.modal.leaveAnimation = this.leaveAnimation;
   }
 
   onSearch(event: any) {
@@ -87,5 +97,6 @@ export class DashboardPage implements OnInit {
   closeModal() {
     this.isModalOpen = false;
     this.selectedClient = null;
+    this.modal.dismiss();
   }
 }

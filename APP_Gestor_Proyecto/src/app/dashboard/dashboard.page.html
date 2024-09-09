@@ -19,7 +19,7 @@
     <ion-list>
       <ion-item *ngFor="let client of filteredClients">
         <ion-label>
-          <ion-card #card  style="width: 200px; --width: 90px;">
+          <ion-card #card  >
             <ion-card-header>
               <ion-card-title>{{ client.name }}</ion-card-title>
             </ion-card-header>
@@ -35,8 +35,9 @@
     </ion-list>
   </div>
 
+
   <!-- Modal -->
-  <ion-modal [isOpen]="isModalOpen">
+  <ion-modal [isOpen]="isModalOpen" #modal trigger="modal-trigger">
     <ng-template>
       <ion-header>
         <ion-toolbar>
