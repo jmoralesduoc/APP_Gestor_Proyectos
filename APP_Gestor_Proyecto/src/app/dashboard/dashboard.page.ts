@@ -43,6 +43,7 @@ export class DashboardPage implements OnInit {
       { name: 'CCU', description: 'assets/img/ccu.png', detalle: 'CCU es una empresa multicategoría...' },
       { name: 'Coca-Cola', description: 'assets/img/cocacola.png', detalle: 'Somos el embotellador más grande del mundo...' },
       { name: 'Meta', description: 'assets/img/meta.png', detalle: 'Meta desarrolla tecnologías que ayudan a las personas...' },
+      { name: 'Falabella', description: 'assets/img/cmr.png', detalle: 'MISIÓN Hacer posibles las aspiraciones de las personas, mejorar su calidad de vida y superar sus expectativas a través de una oferta integrada de servicios financieros, potenciada por los beneficios del "Mundo Falabella"....' },
     ];
     this.filteredClients = [...this.allClients];
   }
