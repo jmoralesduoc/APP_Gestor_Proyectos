@@ -23,7 +23,7 @@
     </ion-item>
 
     <div *ngIf="password?.errors?.['pattern'] && password?.touched">
-      <ion-text color="danger">Password debe tener al menos 4 números, 3 caracteres especiales y 1 letra mayúscula.</ion-text>
+      <ion-text color="danger">Password debe tener al menos 4 números, 3 caracteres y 1 letra mayúscula.</ion-text>
     </div>
 
     <mat-spinner *ngIf="isLoading" diameter="40"></mat-spinner>

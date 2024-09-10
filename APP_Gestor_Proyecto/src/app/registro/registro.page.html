@@ -32,7 +32,7 @@
       La contraseña es requerida
     </ion-note>
     <ion-note *ngIf="registerForm?.get('password')?.hasError('pattern') && registerForm?.get('password')?.touched">
-      La contraseña debe tener al menos 8 caracteres, 4 dígitos, 3 caracteres especiales y 1 letra mayúscula.
+      La contraseña debe tener al menos 8 caracteres, 4 dígitos, 3 caracteres  y 1 letra mayúscula.
     </ion-note>
 
     <ion-button type="submit" [disabled]="registerForm?.invalid">
