@@ -1,5 +1,5 @@
 {
-  "name": "APP_Gestor_Proyecto",
+  "name": "app_gestor_proyecto",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -65,11 +65,11 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.4.0"
   },
-  "description": "An Ionic project",
+  "description": "Gestión de Proyectos",
   "main": "karma.conf.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jmoralesduoc/APP_Gestor_Proyectos.git"
+    "url": "git@github.com:jmoralesduoc/APP_Gestor_Proyectos.git"
   },
   "license": "ISC",
   "bugs": {
