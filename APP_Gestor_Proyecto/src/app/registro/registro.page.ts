@@ -26,7 +26,7 @@ export class RegistroPage {
         password: ['',    
            [
             Validators.required,
-            Validators.pattern(/^(?=(?:.*\d){4})(?=(?:.*[!@#$%^&*()_+=[\]{};':"\\|,.<>/?`~\-]){3})(?=.*[A-Z]).{8,}$/)
+            Validators.pattern(/^(?=(?:[^0-9]*\d){4})(?=(?:[^a-z]*[a-z]){3})(?=(?:[^A-Z]*[A-Z]){1})[A-Za-z\d]{8,}$/)
           ]
         ],
         nombres: ['',
