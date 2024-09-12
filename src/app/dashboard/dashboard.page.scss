@@ -2,11 +2,15 @@
 
 /* Estilos para el contenedor de la página */
 .dashboard-container {
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px; /* Espacio entre las tarjetas */
-  }
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Espacio entre las tarjetas */
+  background-color: #003cff; /* Color de fondo */
+  /* background: url('ruta/a/tu/imagen.jpg') no-repeat center center; */ /* Fondo con imagen */
+  /* background-size: cover; */ /* Asegúrate de ajustar la imagen al tamaño del contenedor */
+}
+
   
   /* Estilos para las tarjetas */
   ion-card {
@@ -35,9 +39,11 @@
     align-items: center;
   }
   
-  ion-searchbar {
-    max-width: 400px; // Ajusta según tus necesidades
-  }
+/* Estilos para la barra de búsqueda */
+ion-searchbar {
+  max-width: 400px; // Ajusta según tus necesidades
+  --background: #000000; /* Color de fondo del campo de búsqueda */
+}
   
   .logo {
     max-width: 75px;  // Ajusta el tamaño según sea necesario
