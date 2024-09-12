@@ -42,4 +42,10 @@ export class ContrasenaPage {
       console.log('Formulario inválido');
     }
   }
+
+  logout(){
+    
+    this.router.navigate(['/login']);
+  }
+
 }
