@@ -74,4 +74,5 @@ export class LoginPage implements OnInit {
   ir_restablecer() {
     this.router.navigate(['/contrasena']);
   }
+
 }
