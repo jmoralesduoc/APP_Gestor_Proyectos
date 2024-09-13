@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Resetear Contraseña</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="resetForm" (ngSubmit)="onSubmit()">
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="resetForm?.invalid">
+      Enviar Contraseña
+    </ion-button>
+
+    <ion-button color="danger" (click)="logout()">Cancelar</ion-button>
+
+
+  </form>
+</ion-content>

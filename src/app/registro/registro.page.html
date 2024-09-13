@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Registro Nuevo Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" id="registerForm">
+    <ion-item>
+      <ion-label position="floating">Nombres</ion-label>
+      <ion-input type="text" formControlName="nombres"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Apellidos</ion-label>
+      <ion-input type="text" formControlName="apellidos"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="registerForm?.get('email')?.hasError('required') && registerForm?.get('email')?.touched">
+      El email es requerido
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="registerForm?.get('password')?.hasError('required') && registerForm?.get('password')?.touched">
+      La contraseña es requerida
+    </ion-note>
+    <ion-note *ngIf="registerForm?.get('password')?.hasError('pattern') && registerForm?.get('password')?.touched">
+      La contraseña debe tener al menos 8 caracteres, 4 dígitos, 3 caracteres  y 1 letra mayúscula.
+    </ion-note>
+
+    <ion-button type="submit" [disabled]="registerForm?.invalid">
+      Registrarse
+    </ion-button>
+
+    <ion-button color="danger" (click)="logout()">Cancelar</ion-button>
+  </form>
+</ion-content>
