@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import * as bcrypt from 'bcryptjs';
-import { UsuarioService } from '../services/srv-usuario.service';
+import { UsuarioService } from '../srv-usuario.service';
 import { Usuario } from '../models/usuario.model'; // Importar la interfaz
 
 @Component({
@@ -39,12 +39,26 @@ export class RegistroPage {
       // Encriptar la contraseña usando bcryptjs
       const hashedPassword = bcrypt.hashSync(password, saltRounds);
 
+    // Obtener los valores del formulario
+    const nombres = this.registerForm.value.nombres;
+    const apellidos = this.registerForm.value.apellidos;
+
+    // Obtener la primera inicial del nombre
+    const inicialNombre = nombres.charAt(0).toUpperCase();
+    
+    // Eliminar caracteres especiales del apellido
+    const apellidoLimpio = apellidos.replace(/[^a-zA-Z0-9]/g, '');
+
+    // Crear el id
+    const id = `${inicialNombre}${apellidoLimpio}`;
+
       const usuario: Usuario = {
         nombres: this.registerForm.value.nombres,
         apellidos: this.registerForm.value.apellidos,
         correo: this.registerForm.value.email,
         password: hashedPassword,
         cliente_id: 0,
+        id: id,
       };
 
       // Verificar si ya existe un cliente con el mismo correo para obtener su cliente_id
