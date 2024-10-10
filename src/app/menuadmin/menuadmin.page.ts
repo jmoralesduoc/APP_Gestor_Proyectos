@@ -34,12 +34,15 @@ export class MenuadminPage implements OnInit {
     this.router.navigate(['/login']);
   }
   irAutorizaciones(){
-
+    this.router.navigate(['/autorizaciones']);
   }
   irClientes(){
-
+    this.router.navigate(['/cliente']);
   }
   irProyectos(){
+    this.router.navigate(['/proyectos']);
+  }
+  irAsigauto(){
     
   }
 }

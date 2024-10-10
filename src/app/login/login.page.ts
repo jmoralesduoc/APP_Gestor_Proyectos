@@ -4,7 +4,7 @@ import { Router, NavigationStart, NavigationExtras } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Storage } from '@ionic/storage-angular';
 import { UsuarioService } from '../srv-usuario.service'; 
-import { SrvAutorizacionService } from '../srv-autorizacion.service'; 
+import { SrvAutorizacionUserService } from '../srv-autorizacion-user.service'; 
 import * as bcrypt from 'bcryptjs';
 import { AlertController } from '@ionic/angular';
 
@@ -23,7 +23,7 @@ export class LoginPage implements OnInit {
     private router: Router,
     private storage: Storage,
     private usuarioService: UsuarioService,
-    private usuarioAutorizacion: SrvAutorizacionService,
+    private usuarioAutorizacion: SrvAutorizacionUserService,
     private alertController: AlertController
   ) {
     this.storage.create(); // Inicializa el Storage
