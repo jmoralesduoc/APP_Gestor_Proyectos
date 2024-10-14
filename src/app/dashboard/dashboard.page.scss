@@ -19,7 +19,7 @@
   }
   
   ion-card-img {
-    height: 200px; /* Ajusta la altura de la imagen según sea necesario */
+    height: 50px; /* Ajusta la altura de la imagen según sea necesario */
     object-fit: cover; /* Ajusta la imagen para cubrir el área */
   }
   
@@ -42,7 +42,7 @@
 /* Estilos para la barra de búsqueda */
 ion-searchbar {
   max-width: 400px; // Ajusta según tus necesidades
-  --background: #000000; /* Color de fondo del campo de búsqueda */
+  --background: white; /* Color de fondo del campo de búsqueda */
 }
   
   .logo {

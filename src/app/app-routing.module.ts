@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes,Router } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
+  
   {
     path: '',
     redirectTo: 'login',
@@ -29,7 +27,8 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule)
+    loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'proyectos',
@@ -46,7 +45,8 @@ const routes: Routes = [
   {
     path: 'configuracion',
     loadChildren: () => import('./configuracion/configuracion.module').then( m => m.ConfiguracionPageModule)
-  },  {
+  },
+  {
     path: 'registro',
     loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
   },
@@ -54,6 +54,20 @@ const routes: Routes = [
     path: 'reportes',
     loadChildren: () => import('./reportes/reportes.module').then( m => m.ReportesPageModule)
   },
+  {
+    path: 'cliente',
+    loadChildren: () => import('./cliente/cliente.module').then( m => m.ClientePageModule)
+  },
+  {
+    path: 'menuadmin',
+    loadChildren: () => import('./menuadmin/menuadmin.module').then( m => m.MenuadminPageModule)
+  },
+  {
+    path: 'autorizaciones',
+    loadChildren: () => import('./autorizaciones/autorizaciones.module').then( m => m.AutorizacionesPageModule)
+  },
+
+
 
 ];
 
