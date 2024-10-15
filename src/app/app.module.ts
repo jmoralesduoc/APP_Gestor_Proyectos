@@ -9,6 +9,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicStorageModule } from '@ionic/storage-angular'; 
 import { SQLiteService } from './srv-sqllite.service';
+import { SQLite } from '@awesome-cordova-plugins/sqlite';
 
 
 @NgModule({
@@ -17,10 +18,11 @@ import { SQLiteService } from './srv-sqllite.service';
     IonicModule.forRoot(), 
     AppRoutingModule, 
     FormsModule, 
+    IonicModule,
     ReactiveFormsModule,
     IonicStorageModule.forRoot(),
     HttpClientModule ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideAnimationsAsync(),SQLiteService],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideAnimationsAsync(),SQLiteService,SQLite],
   bootstrap: [AppComponent],
   
 })

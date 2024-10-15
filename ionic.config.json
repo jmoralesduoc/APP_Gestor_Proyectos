@@ -1,7 +1,5 @@
 {
   "name": "APP_Gestor_Proyecto",
-  "integrations": {
-    "capacitor": {}
-  },
+  "integrations": {},
   "type": "angular"
 }

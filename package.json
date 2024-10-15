@@ -1,17 +1,4 @@
 {
-  "name": "app_gestor_proyecto",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "lint": "ng lint"
-  },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^18.2.7",
     "@angular/cdk": "^18.2.3",
@@ -23,21 +10,23 @@
     "@angular/platform-browser": "^18.2.7",
     "@angular/platform-browser-dynamic": "^18.2.7",
     "@angular/router": "^18.2.7",
+    "@awesome-cordova-plugins/core": "^6.9.0",
+    "@awesome-cordova-plugins/sqlite": "^6.9.0",
     "@capacitor-community/sqlite": "^6.0.2",
     "@capacitor/app": "6.0.1",
     "@capacitor/core": "6.1.2",
     "@capacitor/haptics": "6.0.1",
     "@capacitor/keyboard": "6.0.2",
     "@capacitor/status-bar": "6.0.1",
-    "@ionic-native/sqlite": "^5.36.0",
-    "@ionic/angular": "^8.0.0",
+    "@ionic/angular": "^8.3.2",
     "@ionic/storage": "^4.0.0",
     "@ionic/storage-angular": "^4.0.0",
     "bcryptjs": "^2.4.3",
+    "cordova-sqlite-storage": "^6.1.0",
     "ionicons": "^7.0.0",
     "jquery": "^3.7.1",
     "jquery-validation": "^1.21.0",
-    "rxjs": "~7.8.0",
+    "rxjs": "^7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
   },
@@ -69,15 +58,5 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.4.0"
-  },
-  "description": "Gestión de Proyectos",
-  "main": "karma.conf.js",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:jmoralesduoc/APP_Gestor_Proyectos.git"
-  },
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jmoralesduoc/APP_Gestor_Proyectos/issues"
   }
 }
