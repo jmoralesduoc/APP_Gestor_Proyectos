@@ -1,8 +1,9 @@
-// src/app/autorizaciones/autorizaciones.page.ts
 import { Component, OnInit } from '@angular/core';
 import { SrvAutorizacionService } from '../srv-autorizacion.service';
 import { AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DataService } from '../srv-data.service';
+
 
 @Component({
   selector: 'app-autorizaciones',
@@ -11,16 +12,22 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AutorizacionesPage implements OnInit {
   autorizaciones: any[] = [];
-
+  nombreAutorizacion: string = '';
+  accion: string = '';
+  autorizacionId: number = 0;
+  
   constructor(
     private autorizacionService: SrvAutorizacionService,
     private alertController: AlertController,
     private router: Router,
+    private dataService: DataService,
   ) {}
 
-  ngOnInit() {
-    this.cargarAutorizaciones();
+  async ngOnInit() {
+    await this.loadAutorizaciones();
   }
+
+ 
 
   cargarAutorizaciones() {
     this.autorizacionService.obtenerAutorizaciones().subscribe(
@@ -33,43 +40,24 @@ export class AutorizacionesPage implements OnInit {
     );
   }
 
-  async crearAutorizacion() {
-    const alert = await this.alertController.create({
-      header: 'Crear Autorización',
-      inputs: [
-        {
-          name: 'nombre_autorizacion',
-          type: 'text',
-          placeholder: 'Nombre de Autorización'
-        },
-        {
-          name: 'accion',
-          type: 'text',
-          placeholder: 'Acción'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel'
-        },
-        {
-          text: 'Crear',
-          handler: (data) => {
-            this.autorizacionService.crearAutorizacion(data).subscribe(
-              () => {
-                this.cargarAutorizaciones();
-              },
-              (error) => {
-                console.error('Error al crear autorización', error);
-              }
-            );
-          }
-        }
-      ]
-    });
+  async loadAutorizaciones() {
+    try {
+      this.autorizaciones = await this.DataService.getAutorizaciones();
+    } catch (error) {
+      console.error('Error al cargar autorizaciones', error);
+    }
+  }
 
-    await alert.present();
+
+
+  
+  async crearAutorizacion() {
+    try {
+      await this.dataService.insertAutorizacion(this.nombreAutorizacion, this.accion);
+      console.log('Autorización creada correctamente');
+    } catch (error) {
+      console.error('Error al crear la autorización', error);
+    }
   }
 
   async modificarAutorizacion(autorizacion: any) {
@@ -113,30 +101,14 @@ export class AutorizacionesPage implements OnInit {
     await alert.present();
   }
 
-  async eliminarAutorizacion(autorizacion: any) {
-    const alert = await this.alertController.create({
-      header: 'Eliminar Autorización',
-      message: '¿Estás seguro de que quieres eliminar esta autorización?',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel'
-        },
-        {
-          text: 'Eliminar',
-          handler: () => {
-            this.autorizacionService.eliminarAutorizacion(autorizacion.id).subscribe(
-              () => {
-                this.cargarAutorizaciones();
-              },
-              (error) => {
-                console.error('Error al eliminar autorización', error);
-              }
-            );
-          }
-        }
-      ]
-    });
+  async eliminarAutorizacion() {
+    try {
+      await this.dataService.deleteAutorizacion(this.autorizacionId);
+      console.log('Autorización eliminada correctamente');
+    } catch (error) {
+      console.error('Error al eliminar la autorización', error);
+    }
+  }
 
     await alert.present();
   }
