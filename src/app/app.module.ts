@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicStorageModule } from '@ionic/storage-angular'; 
+import { SQLiteService } from './srv-sqllite.service';
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
     ReactiveFormsModule,
     IonicStorageModule.forRoot(),
     HttpClientModule ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideAnimationsAsync()],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideAnimationsAsync(),SQLiteService],
   bootstrap: [AppComponent],
   
 })
