@@ -7,6 +7,9 @@ import { UsuarioService } from '../srv-usuario.service';
 import { SrvAutorizacionUserService } from '../srv-autorizacion-user.service'; 
 import * as bcrypt from 'bcryptjs';
 import { AlertController } from '@ionic/angular';
+import { SQLiteService } from '../srv-sqllite.service';
+import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
+
 
 @Component({
   selector: 'app-login',
@@ -24,9 +27,21 @@ export class LoginPage implements OnInit {
     private storage: Storage,
     private usuarioService: UsuarioService,
     private usuarioAutorizacion: SrvAutorizacionUserService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private sqliteService: SQLiteService
   ) {
     this.storage.create(); // Inicializa el Storage
+    this.initializeDatabase();
+  }
+
+  async initializeDatabase() {
+    try {
+      await this.sqliteService.openDatabase();
+      await this.sqliteService.createTables();
+      console.log('Base de datos inicializada');
+    } catch (error) {
+      console.error('Error al inicializar la base de datos', error);
+    }
   }
 
   async presentAlert(header: string, message: string) {
