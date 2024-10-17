@@ -12,7 +12,7 @@ export class SrvAutorizacionService {
   constructor(private http: HttpClient) {}
 
   // Obtener todas las autorizaciones
-  obtenerAutorizaciones(): Observable<any[]> {
+  getAutorizaciones(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 

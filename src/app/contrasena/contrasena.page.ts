@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastController } from '@ionic/angular';  // Importa el controlador de toast
-import { Router, NavigationExtras } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contrasena',
@@ -13,12 +13,12 @@ export class ContrasenaPage {
 
   constructor(
     private formBuilder: FormBuilder,
-    private toastController: ToastController ,
-    private fb: FormBuilder, private router: Router
+    private toastController: ToastController,
+    private router: Router
   ) {
-    // Inicializa el formulario reactivo
+    // Inicializa el formulario reactivo con validaciones
     this.resetForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]]  // Validación del campo email
+      email: ['', [Validators.required, Validators.email]]
     });
   }
 
@@ -27,7 +27,10 @@ export class ContrasenaPage {
     if (this.resetForm.valid) {
       console.log('Formulario válido:', this.resetForm.value);
 
-      // Muestra el toast cuando el formulario es enviado correctamente
+      // Aquí puedes agregar la lógica para enviar el correo al backend
+      // Ejemplo: this.authService.resetPassword(this.resetForm.value.email);
+
+      // Muestra un mensaje de éxito al usuario
       const toast = await this.toastController.create({
         message: 'Contraseña enviada al Correo Registrado',
         duration: 7000,
@@ -35,17 +38,26 @@ export class ContrasenaPage {
       });
       await toast.present();
 
+      // Redirige al usuario a la página de login
       this.router.navigate(['/login']);
-      // Aquí podrías agregar la lógica para enviar el correo, por ejemplo:
-      // this.authService.resetPassword(this.resetForm.value.email);
     } else {
-      console.log('Formulario inválido');
+      // Muestra un mensaje de error si el formulario no es válido
+      const toast = await this.toastController.create({
+        message: 'Por favor, ingrese un correo válido.',
+        duration: 3000,
+        position: 'bottom'
+      });
+      await toast.present();
     }
   }
 
-  logout(){
-    
+  // Función para cancelar el proceso y redirigir al login
+  logout() {
     this.router.navigate(['/login']);
   }
 
+  // Getter para un acceso más limpio al control de email
+  get email() {
+    return this.resetForm.get('email');
+  }
 }
