@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { SQLiteService } from './srv-sqllite.service'; // Import del servicio SQLiteService
+import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { SQLiteService } from './srv-sqllite.service'; // Import del servicio SQ
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    SQLiteService
+    SQLiteService,
+    SQLite 
     
   ],
   bootstrap: [AppComponent],
