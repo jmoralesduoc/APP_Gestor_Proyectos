@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SrvAutorizacionService } from '../srv-autorizacion.service';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { SQLiteService } from '../srv-data.service';
+import { SQLiteService } from '../srv-sqllite.service';
 
 @Component({
   selector: 'app-autorizaciones',
@@ -22,11 +22,12 @@ export class AutorizacionesPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadAutorizaciones(); // Sin necesidad de await
+    this.loadAutorizaciones();
+   
   }
 
   loadAutorizaciones() {
-    this.dataService.getAutorizaciones().subscribe(
+    this.autorizacionService.getAutorizaciones().subscribe(
       (autorizaciones) => {
         this.autorizaciones = autorizaciones || [];
       },
@@ -37,23 +38,41 @@ export class AutorizacionesPage implements OnInit {
   }
 
   crearAutorizacion() {
-    this.dataService.insertAutorizacion(this.nombreAutorizacion, this.accion).subscribe(
+    const nuevaAutorizacion = { nombre_autorizacion: this.nombreAutorizacion, accion: this.accion };
+
+    this.autorizacionService.crearAutorizacion(nuevaAutorizacion).subscribe(
       () => {
-        console.log('Autorización creada correctamente');
-        this.loadAutorizaciones();  // Recarga la lista después de crear
+        // Insertar en SQLite
+        try {
+          this.dataService.openDatabase();
+          this.dataService.createTables();
+         console.log('Base de datos inicializada');
+       } catch (error) {
+         console.error('Error al inicializar la base de datos', error);
+       }
+
+        this.dataService.insertAutorizacion(this.nombreAutorizacion, this.accion).subscribe(
+          () => {
+            console.log('Autorización creada correctamente');
+            this.loadAutorizaciones();  // Recarga la lista después de crear
+          },
+          (error) => {
+            console.error('Error al crear la autorización en SQLite', error);
+          }
+        );
       },
       (error) => {
-        console.error('Error al crear la autorización', error);
+        console.error('Error al crear la autorización en JSON', error);
       }
     );
   }
 
-  async modificarAutorizacion(autorizacion: any) {
-    const alert = await this.alertController.create({
+  modificarAutorizacion(autorizacion: any) {
+    const alert = this.alertController.create({
       header: 'Modificar Autorización',
       inputs: [
         {
-          name: 'nombre_autorizacion',
+          name: 'nombre_autorizacion' ,
           type: 'text',
           value: autorizacion.nombre_autorizacion,
           placeholder: 'Nombre de Autorización'
@@ -86,17 +105,25 @@ export class AutorizacionesPage implements OnInit {
       ]
     });
 
-    await alert.present();
+    alert.then(alertEl => alertEl.present());
   }
 
   eliminarAutorizacion(autorizacion: any) {
-    this.dataService.deleteAutorizacion(autorizacion.id).subscribe(
+    this.autorizacionService.eliminarAutorizacion(autorizacion.id).subscribe(
       () => {
-        console.log('Autorización eliminada correctamente');
-        this.loadAutorizaciones();  // Recarga la lista después de eliminar
+        console.log('Autorización eliminada en JSON, ahora en SQLite');
+        this.dataService.deleteAutorizacion(autorizacion.id).subscribe(
+          () => {
+            console.log('Autorización eliminada correctamente');
+            this.loadAutorizaciones();  // Recarga la lista después de eliminar
+          },
+          (error) => {
+            console.error('Error al eliminar la autorización en SQLite', error);
+          }
+        );
       },
       (error) => {
-        console.error('Error al eliminar la autorización', error);
+        console.error('Error al eliminar autorización en JSON', error);
       }
     );
   }
