@@ -7,7 +7,7 @@ import { Observable, from } from 'rxjs';
 })
 export class SQLiteService {
   private db: SQLiteObject | undefined;
-  
+
   constructor(private sqlite: SQLite) {}
 
   // Abrir la base de datos
@@ -99,13 +99,10 @@ export class SQLiteService {
         );`
       ];
 
+      // Usamos el método `map` para crear un array de Observables y luego `forkJoin` para manejarlos
       const createTableObservables = queries.map(query => {
-        if (!this.db) {
-          throw new Error('La conexión a la base de datos no está abierta.');
-        }
-        return from(this.db.executeSql(query, []));
+        return from(this.db!.executeSql(query, [])); // Añadido el operador `!` para garantizar que `this.db` no es undefined
       });
-      
 
       Promise.all(createTableObservables)
         .then(() => {

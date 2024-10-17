@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SrvUsuarioService } from './srv-usuario.service';
+import { UsuarioService } from './srv-usuario.service';
 
 describe('SrvUsuarioService', () => {
-  let service: SrvUsuarioService;
+  let service: UsuarioService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SrvUsuarioService);
+    service = TestBed.inject(UsuarioService);
   });
 
   it('should be created', () => {
