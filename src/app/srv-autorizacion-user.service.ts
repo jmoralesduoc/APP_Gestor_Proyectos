@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SrvAutorizacionUserService {
-  private apiUrl = 'http://localhost:3000/usuario_autorizacion'; // Cambia la URL a tu API
+  private apiUrl = 'https://67119e9a4eca2acdb5f53f65.mockapi.io/Gestion_proyecto/usuario_autorizacion'; // Cambia la URL a tu API
+  //private apiUrl = 'http://localhost:3000/usuario_autorizacion'; // Cambia la URL a tu API
 
   constructor(private http: HttpClient) {}
 
