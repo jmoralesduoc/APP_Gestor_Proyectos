@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UbicacionService } from '../services/ubicacion.service';
+import { UbicacionService } from '../api/ubicacion.service';
 
 @Component({
   selector: 'app-home',

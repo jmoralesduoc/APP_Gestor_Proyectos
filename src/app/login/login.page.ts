@@ -9,7 +9,8 @@ import * as bcrypt from 'bcryptjs';
 import { AlertController } from '@ionic/angular';
 import { SQLiteService } from '../srv-sqllite.service';
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
-
+import { StorageService } from '..//services/storage.service';
+import { of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -25,16 +26,35 @@ export class LoginPage implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private storage: Storage,
+    private storageServ: StorageService,
     private usuarioService: UsuarioService,
     private usuarioAutorizacion: SrvAutorizacionUserService,
     private alertController: AlertController,
-    private sqliteService: SQLiteService
+    private sqliteService: SQLiteService,
+    
   ) {
     this.storage.create(); // Inicializa el Storage
-    this.initializeDatabase();
+    //this.initializeDatabase();
+    try {
+      this.storageServ.userState().pipe(
+        switchMap(res => {
+          if (res) {
+            return this.storageServ.fetchUsers();
+          } else {
+            return of([]); // Return an empty array when res is false
+          }
+        })
+      ).subscribe(data => {
+        //this.userList = data; // Update the user list when the data changes
+      });
+
+    } catch(err) {
+      throw new Error(`Error: ${err}`);
+    }
+
   }
 
-  async initializeDatabase() {
+  /*async initializeDatabase() {
     try {
       await this.sqliteService.openDatabase();
       await this.sqliteService.createTables();
@@ -42,7 +62,7 @@ export class LoginPage implements OnInit {
     } catch (error) {
       console.error('Error al inicializar la base de datos', error);
     }
-  }
+  }*/
 
   async presentAlert(header: string, message: string) {
     const alert = await this.alertController.create({
