@@ -66,6 +66,11 @@ export class RegistroPage {
         if (usuariosExistentes.length > 0) {
           // Si existe un usuario, obtener el cliente_id
           usuario.cliente_id = usuariosExistentes[0].cliente_id;
+          const toast = await this.toastController.create({
+            message: 'Registro existente',
+            duration: 7000,
+            position: 'bottom'
+          });
         } else {
           // Obtener el máximo cliente_id existente
           this.usuarioService.obtenerMaxClienteId().subscribe(async (usuarios: Usuario[]) => {
@@ -102,14 +107,57 @@ export class RegistroPage {
             console.error('Error al obtener el máximo cliente_id:', error);
           });
         }
-      }, async error => {
-        const toast = await this.toastController.create({
+      }, 
+
+      
+      
+      async error => {       
+
+         // Obtener el máximo cliente_id existente
+         this.usuarioService.obtenerMaxClienteId().subscribe(async (usuarios: Usuario[]) => {
+          const maxClienteId = Math.max(...usuarios.map((user: Usuario) => user.cliente_id ?? 0));
+          usuario.cliente_id = maxClienteId + 1; // Generar el nuevo cliente_id correlativo
+
+          // Luego registrar al usuario con el cliente_id ya establecido
+          this.usuarioService.registrarUsuario(usuario).subscribe(async response => {
+            const toast = await this.toastController.create({
+              message: 'Registrado Correctamente',
+              duration: 7000,
+              position: 'bottom'
+            });
+            await toast.present();
+
+            this.router.navigate(['/login']);
+            console.log('Usuario registrado:', response);
+          }, async error => {
+            const toast = await this.toastController.create({
+              message: 'Error al registrar usuario',
+              duration: 7000,
+              position: 'bottom'
+            });
+            await toast.present();
+            console.error('Error al registrar el usuario:', error);
+          });
+        }, async error => {
+          const toast = await this.toastController.create({
+            message: 'Error al obtener el máximo cliente_id',
+            duration: 7000,
+            position: 'bottom'
+          });
+          await toast.present();
+          console.error('Error al obtener el máximo cliente_id:', error);
+        });
+
+
+       /* const toast = await this.toastController.create({
+          
           message: 'Error al verificar el cliente',
           duration: 7000,
           position: 'bottom'
         });
         await toast.present();
         console.error('Error al verificar el cliente:', error);
+        */
       });
 
     } else {

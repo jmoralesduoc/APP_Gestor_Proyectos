@@ -21,12 +21,11 @@ export class UsuarioService {
   // Método para obtener un usuario por su correo electrónico
   obtenerUsuarioPorCorreo(correo: string): Observable<any> {
     return this.http.get(`${this.apiUrl}?correo=${correo}`);
-
-    
+   
   }
 
   // Método para obtener el máximo cliente_id
   obtenerMaxClienteId(): Observable<any> {
-    return this.http.get(`${this.apiUrl}`); // Obtiene todos los usuarios
+      return this.http.get(`${this.apiUrl}`); // Obtiene todos los usuarios
   }
 }
