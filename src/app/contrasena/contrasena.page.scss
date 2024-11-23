@@ -1,0 +1,55 @@
+/* Estilos para el logo en el header */
+
+
+ion-label {
+    color: white; /* Etiquetas en blanco */
+  }
+  
+  ion-input {
+    color: white; /* Texto de entrada en blanco */
+  }
+  
+  /* Estilos para los botones */
+  .login-button, .secondary-button {
+    --background: #f8c231; /* Mismo color para todos los botones */
+    --color: #000000; /* Texto negro */
+    --border-radius: 12px; /* Borde redondeado */
+    font-size: 1.2rem; /* Tamaño de texto */
+    padding: 12px; /* Espacio interno */
+    margin-top: 20px; /* Margen superior */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+  }
+  
+  /* Estilos para la fila de botones */
+  .button-row {
+    display: flex;
+    justify-content: space-between; /* Coloca los botones uno al lado del otro con espacio entre ellos */
+    margin-top: 20px;
+  }
+  
+  .secondary-button {
+    flex: 1;
+    margin-right: 10px; /* Espacio entre los dos botones */
+  }
+  
+  .secondary-button:last-child {
+    margin-right: 0; /* Elimina el margen derecho del último botón */
+  }
+  
+  
+  /* Estilos para los campos del formulario */
+  ion-item {
+    --background: transparent; /* Fondo transparente */
+    --border-color: rgba(0, 0, 0, 0.5); /* Borde negro translúcido */
+    color: black; /* Texto negro */
+    margin-bottom: 16px; /* Espaciado entre campos */
+  }
+  
+  ion-label {
+    color: black; /* Etiquetas en negro */
+  }
+  
+  ion-input {
+    color: black; /* Texto de entrada en negro */
+  }
+  

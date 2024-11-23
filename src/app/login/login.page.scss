@@ -1,18 +1,12 @@
 /* Estilos para el logo en el header */
-.logo {
-  max-width: 75px;  /* Ajusta el tamaño según sea necesario */
-  height: auto;
-  display: block;
-  margin: 0 auto;  /* Centra el logo horizontalmente */
+
+
+ion-label {
+  color: white; /* Etiquetas en blanco */
 }
 
-/* Estilos para el título de login */
-.login-title {
-  color: #ffffff; /* Color blanco */
-  font-weight: bold; /* Negrita */
-  font-size: 1.8rem; /* Tamaño de fuente */
-  text-align: center; /* Centra el título */
-  margin: 0; /* Quitar márgenes */
+ion-input {
+  color: white; /* Texto de entrada en blanco */
 }
 
 /* Estilos para los botones */
@@ -40,4 +34,21 @@
 
 .secondary-button:last-child {
   margin-right: 0; /* Elimina el margen derecho del último botón */
+}
+
+
+/* Estilos para los campos del formulario */
+ion-item {
+  --background: transparent; /* Fondo transparente */
+  --border-color: rgba(0, 0, 0, 0.5); /* Borde negro translúcido */
+  color: black; /* Texto negro */
+  margin-bottom: 16px; /* Espaciado entre campos */
+}
+
+ion-label {
+  color: black; /* Etiquetas en negro */
+}
+
+ion-input {
+  color: black; /* Texto de entrada en negro */
 }
