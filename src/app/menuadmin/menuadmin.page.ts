@@ -37,7 +37,7 @@ export class MenuadminPage implements OnInit {
     this.router.navigate(['/autorizaciones']);
   }
   irClientes(){
-    this.router.navigate(['/cliente']);
+    this.router.navigate(['/clientes']);
   }
   irProyectos(){
     this.router.navigate(['/proyectos']);

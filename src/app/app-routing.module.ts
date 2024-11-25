@@ -35,10 +35,7 @@ const routes: Routes = [
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardPageModule),
     canActivate: [AuthGuard]  // Usa el AuthGuard para proteger esta ruta
   },
-  {
-    path: 'proyectos',
-    loadChildren: () => import('./proyectos/proyectos.module').then(m => m.ProyectosPageModule)
-  },
+
   {
     path: 'detalle-proyectos',
     loadChildren: () => import('./detalle-proyectos/detalle-proyectos.module').then(m => m.DetalleProyectosPageModule)
@@ -56,20 +53,26 @@ const routes: Routes = [
     loadChildren: () => import('./reportes/reportes.module').then(m => m.ReportesPageModule)
   },
   {
-    path: 'cliente',
-    loadChildren: () => import('./cliente/cliente.module').then(m => m.ClientePageModule)
-  },
-  {
     path: 'menuadmin',
     loadChildren: () => import('./menuadmin/menuadmin.module').then(m => m.MenuadminPageModule)
   },
   {
     path: 'autorizaciones',
     loadChildren: () => import('./autorizaciones/autorizaciones.module').then(m => m.AutorizacionesPageModule)
-  },  {
+  },
+  {
     path: 'asignar-rol',
     loadChildren: () => import('./asignar-rol/asignar-rol.module').then( m => m.AsignarRolPageModule)
+  },
+  {
+    path: 'clientes',
+    loadChildren: () => import('./clientes/clientes.module').then( m => m.ClientesPageModule)
+  },
+  {
+    path: 'proyectos',
+    loadChildren: () => import('./proyectos/proyectos.module').then( m => m.ProyectosPageModule)
   }
+
 
 ];
 
