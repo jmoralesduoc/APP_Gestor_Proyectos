@@ -66,7 +66,11 @@ const routes: Routes = [
   {
     path: 'autorizaciones',
     loadChildren: () => import('./autorizaciones/autorizaciones.module').then(m => m.AutorizacionesPageModule)
+  },  {
+    path: 'asignar-rol',
+    loadChildren: () => import('./asignar-rol/asignar-rol.module').then( m => m.AsignarRolPageModule)
   }
+
 ];
 
 @NgModule({

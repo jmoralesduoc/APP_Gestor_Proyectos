@@ -1,33 +1,42 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar style="position: relative; text-align: center; background: transparent;">
     <ion-title>Menu para Administrador</ion-title>
-    <img src="assets/img/admin.png" alt="Logo" class="logo" />
-  </ion-toolbar>
-
-  <ion-toolbar>
-    <h4 *ngIf="data.user">Bienvenido {{ data.user }}</h4>
+    <img src="assets/img/admin.png" alt="Logo" class="logo" style="position: absolute; top: 10px; right: 10px; max-width: 50px;" />
+   
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item button (click)="irAutorizaciones()">
+<ion-content style="position: relative; overflow: hidden;">
+  <!-- Imagen de fondo -->
+  <img src="/assets/img/background.png" alt="Background" 
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;" />
+
+  <!-- Bienvenida -->
+  <div style="text-align: center; margin-top: 20px; color: rgb(10, 10, 10);">
+    <h4 *ngIf="data.user">Bienvenido {{ data.user }}</h4>
+  </div>
+
+  <!-- Lista de opciones -->
+  <ion-list style="z-index: 1; position: relative; max-width: 400px; margin: 20px auto; border-radius: 12px; padding: 10px; background: transparent;">
+    <ion-item class="secondary-button" button (click)="irAutorizaciones()">
       <ion-label>Autorizaciones</ion-label>
     </ion-item>
-    <ion-item button (click)="irAsigauto()">
+    <ion-item class="secondary-button" button (click)="irAsigauto()">
       <ion-label>Usuarios asignación</ion-label>
     </ion-item>
-    <ion-item button (click)="irClientes()">
+    <ion-item class="secondary-button" button (click)="irClientes()">
       <ion-label>Clientes</ion-label>
     </ion-item>
-    <ion-item button (click)="irProyectos()">
+    <ion-item class="secondary-button" button (click)="irProyectos()">
       <ion-label>Proyectos</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-    <ion-button color="danger" (click)="logout()">Cerrar Sesión</ion-button>
+  <ion-toolbar style="display: flex; justify-content: center; background: transparent;">
+    <ion-button expand="block" color="danger" (click)="logout()" style="max-width: 200px;">
+      Cerrar Sesión
+    </ion-button>
   </ion-toolbar>
 </ion-footer>

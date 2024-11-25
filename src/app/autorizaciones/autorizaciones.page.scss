@@ -1,0 +1,36 @@
+/* Lista transparente */
+ion-list {
+    background: transparent; /* Fondo transparente */
+    border-radius: 12px; /* Bordes redondeados */
+    padding: 10px; /* Espaciado interno */
+  }
+  
+  /* Elementos de la lista con texto visible sobre fondo transparente */
+  ion-item {
+    --background: transparent;
+    color: black; /* Cambiar color del texto si es necesario */
+  }
+  
+  ion-label {
+    color: black /* Etiquetas en blanco */
+  }
+  
+  /* Botones "Crear" y "Modificar" en amarillo */
+  ion-button.crear-button,
+
+  ion-button.modificar-button {
+    --background: #f8c231; /* Amarillo */
+    --color: #000; /* Texto negro */
+    font-weight: bold;
+    border-radius: 8px; /* Opcional: bordes redondeados */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra */
+  }
+  /* Botón Eliminar con recuadro rojo */
+ion-button.eliminar-button {
+  --background: transparent; /* Fondo transparente */
+  --color: red; /* Texto en rojo */
+  border: 2px solid red; /* Borde rojo */
+  border-radius: 8px; /* Bordes redondeados opcionales */
+  font-weight: bold; /* Texto en negrita */
+  padding: 5px 10px; /* Espaciado interno */
+}

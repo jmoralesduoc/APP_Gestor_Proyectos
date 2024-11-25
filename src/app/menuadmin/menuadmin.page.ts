@@ -43,6 +43,6 @@ export class MenuadminPage implements OnInit {
     this.router.navigate(['/proyectos']);
   }
   irAsigauto(){
-    
+    this.router.navigate(['/asignar-rol']);
   }
 }
