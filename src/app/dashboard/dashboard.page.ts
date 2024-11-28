@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl } from '@angular/forms';
-import type { Animation } from '@ionic/angular';
-import { AnimationController, IonModal } from '@ionic/angular';
+import { IonModal } from '@ionic/angular';
+import { SrvClientesService } from '../srv-clientes.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,8 +10,7 @@ import { AnimationController, IonModal } from '@ionic/angular';
   styleUrls: ['./dashboard.page.scss']
 })
 export class DashboardPage implements OnInit {
-
-  @ViewChild('modal', { static: false }) modal!: IonModal;  // Asegúrate de tener #modal en el HTML
+  @ViewChild('modal', { static: false }) modal!: IonModal;
 
   searchControl = new FormControl('');
   searchQuery: string = '';
@@ -19,75 +18,51 @@ export class DashboardPage implements OnInit {
   filteredClients: any[] = [];
   isModalOpen = false;
   selectedClient: any;
-
   data: any = {};
-
-  private enterAnimation!: (baseEl: HTMLElement) => Animation;
-  private leaveAnimation!: (baseEl: HTMLElement) => Animation;
 
   constructor(
     private router: Router,
     private activeroute: ActivatedRoute,
-    private animationCtrl: AnimationController
+    private clientesService: SrvClientesService
   ) {
     this.activeroute.queryParams.subscribe(params => {
       const navigation = this.router.getCurrentNavigation();
-      if (navigation && navigation.extras.state && navigation.extras.state) {
+      if (navigation && navigation.extras.state) {
         this.data = navigation.extras.state;
       }
     });
   }
 
   ngOnInit() {
-    this.allClients = [
-      { name: 'CCU', description: 'assets/img/ccu.png', detalle: 'CCU es una empresa multicategoría...' },
-      { name: 'Coca-Cola', description: 'assets/img/cocacola.png', detalle: 'Somos el embotellador más grande del mundo...' },
-      { name: 'Meta', description: 'assets/img/meta.png', detalle: 'Meta desarrolla tecnologías que ayudan a las personas...' },
-      { name: 'Falabella', description: 'assets/img/cmr.png', detalle: 'MISIÓN Hacer posibles las aspiraciones de las personas, mejorar su calidad de vida y superar sus expectativas a través de una oferta integrada de servicios financieros, potenciada por los beneficios del "Mundo Falabella"....' },
-    ];
-    this.filteredClients = [...this.allClients];
+    this.fetchClients();
   }
 
-  ngAfterViewInit() {
-    this.enterAnimation = (baseEl: HTMLElement) => {
-      const root = baseEl.shadowRoot;
-      const backdropAnimation = this.animationCtrl
-        .create()
-        .addElement(root!.querySelector('ion-backdrop')!)
-        .fromTo('opacity', '0.01', 'var(--backdrop-opacity)');
-      const wrapperAnimation = this.animationCtrl
-        .create()
-        .addElement(root!.querySelector('.modal-wrapper')!)
-        .keyframes([
-          { offset: 0, opacity: '0', transform: 'scale(0)' },
-          { offset: 1, opacity: '0.99', transform: 'scale(1)' },
-        ]);
-      return this.animationCtrl
-        .create()
-        .addElement(baseEl)
-        .easing('ease-out')
-        .duration(500)
-        .addAnimation([backdropAnimation, wrapperAnimation]);
-    };
-
-    this.leaveAnimation = (baseEl: HTMLElement) => {
-      return this.enterAnimation(baseEl).direction('reverse');
-    };
-
-    this.modal.enterAnimation = this.enterAnimation;
-    this.modal.leaveAnimation = this.leaveAnimation;
-  }
-
-  onSearch(event: any) {
-    this.searchQuery = event.detail.value.toLowerCase();
-    this.filteredClients = this.allClients.filter(client =>
-      client.name.toLowerCase().includes(this.searchQuery) ||
-      client.description.toLowerCase().includes(this.searchQuery)
+  fetchClients() {
+    this.clientesService.getClientes().subscribe(
+      (data) => {
+        this.allClients = data.map(client => ({
+          name: client.nombre,
+          description: client.logo,
+          detalle: client.detalle,
+        }));
+        this.filteredClients = [...this.allClients];
+      },
+      (error) => {
+        console.error('Error al obtener los clientes:', error);
+      }
     );
   }
 
-  logout() {
-    this.router.navigate(['/login']);
+  onSearch(event: any) {
+    const query = event.target.value ? event.target.value.toLowerCase() : '';
+    if (query.trim() === '') {
+      this.filteredClients = [...this.allClients];
+      return;
+    }
+    this.filteredClients = this.allClients.filter(client =>
+      (client.name && client.name.toLowerCase().includes(query)) ||
+      (client.detalle && client.detalle.toLowerCase().includes(query))
+    );
   }
 
   openModal(client: any) {
@@ -98,6 +73,16 @@ export class DashboardPage implements OnInit {
   closeModal() {
     this.isModalOpen = false;
     this.selectedClient = null;
-    this.modal.dismiss();
   }
+
+  logout() {
+    this.router.navigate(['/login']);
+  }
+
+  navigateToProjects(client: any) {
+    this.router.navigate(['/proyectos'], {
+      state: { clientId: client.id, clientName: client.name }
+    });
+  }
+  
 }

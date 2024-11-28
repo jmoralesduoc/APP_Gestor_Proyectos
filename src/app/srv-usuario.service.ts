@@ -28,4 +28,7 @@ export class UsuarioService {
   obtenerMaxClienteId(): Observable<any> {
       return this.http.get(`${this.apiUrl}`); // Obtiene todos los usuarios
   }
+
+
+  
 }

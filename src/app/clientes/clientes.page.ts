@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { SrvClientesService } from '..//srv-clientes.service';
 import { AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { SeleccionarUsuarioComponent } from '../seleccionar-usuario/seleccionar-usuario.component';
+
 
 @Component({
   selector: 'app-clientes',
@@ -14,7 +17,8 @@ export class ClientesPage implements OnInit {
   constructor(
     private clientesService: SrvClientesService,
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private modalController: ModalController
   ) {}
 
   ngOnInit() {
@@ -148,5 +152,35 @@ export class ClientesPage implements OnInit {
   back() {
     this.router.navigate(['/menuadmin']);
   }
+  
+  async asignarUsuario(cliente: any) {
+    const modal = await this.modalController.create({
+      component: SeleccionarUsuarioComponent,
+      componentProps: { clienteId: cliente.id }, // Pasar clienteId al modal
+    });
+  
+    modal.onDidDismiss().then((result) => {
+      if (result.data) {
+        const usuarioId = result.data.usuarioId; // ID del usuario seleccionado
+        this.clientesService.asignarUsuario(cliente, usuarioId).subscribe(
+          () => {
+            this.mostrarAlerta('Éxito', 'Usuario asignado correctamente.');
+            this.cargarClientes(); // Refresca la lista de clientes
+          },
+          (error) => {
+            console.error('Error al asignar usuario:', error);
+            this.mostrarAlerta('Error', 'No se pudo asignar el usuario.');
+          }
+        );
+      }
+    });
+  
+    await modal.present();
+  }
+  
+  
+  
+  
+  
   
 }

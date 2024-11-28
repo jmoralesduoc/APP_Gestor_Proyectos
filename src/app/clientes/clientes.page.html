@@ -13,22 +13,24 @@
       <ion-avatar slot="start">
         <img [src]="cliente.logo" alt="Logo" />
       </ion-avatar>
-      <ion-label>
-        <h2>{{ cliente.nombre }}</h2>
-        <p>{{ cliente.direccion }}</p>
-        <p>{{ cliente.telefono }}</p>
-        <p>{{ cliente.correo }}</p>
-      </ion-label>
+      <div style="flex: 1;">
+        <ion-label>
+          <h2>{{ cliente.nombre }}</h2>
+          <p>{{ cliente.direccion }}</p>
+          <p>{{ cliente.telefono }}</p>
+          <p>{{ cliente.correo }}</p>
+        </ion-label>
+      </div>
       <ion-buttons slot="end">
         <ion-button color="primary" (click)="cargarLogo(cliente)">Logo</ion-button>
         <ion-button color="warning" (click)="editarCliente(cliente)">Editar</ion-button>
         <ion-button color="danger" (click)="eliminarCliente(cliente)">Eliminar</ion-button>
+        <ion-button color="secondary" (click)="asignarUsuario(cliente)">Asignar Usuario</ion-button>
       </ion-buttons>
     </ion-item>
   </ion-list>
+  
 </ion-content>
-
-
 
 <ion-footer>
   <ion-toolbar>
