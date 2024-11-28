@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ClientePageRoutingModule } from './cliente-routing.module';
+import { AsignarRolPageRoutingModule } from './asignar-rol-routing.module';
 
-import { ClientePage } from './cliente.page';
+import { AsignarRolPage } from './asignar-rol.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ClientePageRoutingModule
+    AsignarRolPageRoutingModule
   ],
-  declarations: [ClientePage]
+  declarations: [AsignarRolPage]
 })
-export class ClientePageModule {}
+export class AsignarRolPageModule {}

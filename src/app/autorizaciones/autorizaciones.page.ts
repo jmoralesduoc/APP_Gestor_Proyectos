@@ -38,34 +38,53 @@ export class AutorizacionesPage implements OnInit {
   }
 
   crearAutorizacion() {
-    const nuevaAutorizacion = { nombre_autorizacion: this.nombreAutorizacion, accion: this.accion };
-
-    this.autorizacionService.crearAutorizacion(nuevaAutorizacion).subscribe(
-      () => {
-        // Insertar en SQLite
-        try {
-          this.dataService.openDatabase();
-          this.dataService.createTables();
-         console.log('Base de datos inicializada');
-       } catch (error) {
-         console.error('Error al inicializar la base de datos', error);
-       }
-
-        this.dataService.insertAutorizacion(this.nombreAutorizacion, this.accion).subscribe(
-          () => {
-            console.log('Autorización creada correctamente');
-            this.loadAutorizaciones();  // Recarga la lista después de crear
-          },
-          (error) => {
-            console.error('Error al crear la autorización en SQLite', error);
+    const alert = this.alertController.create({
+      header: 'Crear Autorización',
+      inputs: [
+        {
+          name: 'nombre_autorizacion',
+          type: 'text',
+          placeholder: 'Nombre de Autorización'
+        },
+        {
+          name: 'accion',
+          type: 'text',
+          placeholder: 'Acción'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Crear',
+          handler: (data) => {
+            if (data.nombre_autorizacion && data.accion) {
+              const nuevaAutorizacion = {
+                nombre_autorizacion: data.nombre_autorizacion,
+                accion: data.accion
+              };
+              this.autorizacionService.crearAutorizacion(nuevaAutorizacion).subscribe(
+                () => {
+                  console.log('Autorización creada correctamente');
+                  this.loadAutorizaciones(); // Recargar la lista
+                },
+                (error) => {
+                  console.error('Error al crear la autorización', error);
+                }
+              );
+            } else {
+              console.error('Todos los campos son obligatorios');
+            }
           }
-        );
-      },
-      (error) => {
-        console.error('Error al crear la autorización en JSON', error);
-      }
-    );
+        }
+      ]
+    });
+  
+    alert.then(alertEl => alertEl.present());
   }
+  
 
   modificarAutorizacion(autorizacion: any) {
     const alert = this.alertController.create({
@@ -104,29 +123,43 @@ export class AutorizacionesPage implements OnInit {
         }
       ]
     });
-
+    this.loadAutorizaciones();
     alert.then(alertEl => alertEl.present());
   }
 
   eliminarAutorizacion(autorizacion: any) {
-    this.autorizacionService.eliminarAutorizacion(autorizacion.id).subscribe(
-      () => {
-        console.log('Autorización eliminada en JSON, ahora en SQLite');
-        this.dataService.deleteAutorizacion(autorizacion.id).subscribe(
-          () => {
-            console.log('Autorización eliminada correctamente');
-            this.loadAutorizaciones();  // Recarga la lista después de eliminar
-          },
-          (error) => {
-            console.error('Error al eliminar la autorización en SQLite', error);
+    this.alertController.create({
+      header: 'Confirmar Eliminación',
+      message: `¿Estás seguro de que deseas eliminar la autorización "${autorizacion.nombre_autorizacion}"?`,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Eliminación cancelada');
           }
-        );
-      },
-      (error) => {
-        console.error('Error al eliminar autorización en JSON', error);
-      }
-    );
+        },
+        {
+          text: 'Eliminar',
+          role: 'destructive',
+          handler: () => {
+            // Lógica de eliminación del servicio remoto
+            this.autorizacionService.eliminarAutorizacion(autorizacion.id).subscribe(
+              () => {
+                console.log('Autorización eliminada correctamente');
+                this.loadAutorizaciones(); // Recarga la lista después de eliminar
+              },
+              (error) => {
+                console.error('Error al eliminar autorización', error);
+              }
+            );
+          }
+        }
+      ]
+    }).then(alertEl => alertEl.present());
   }
+  
+  
 
   back() {
     this.router.navigate(['/menuadmin']);

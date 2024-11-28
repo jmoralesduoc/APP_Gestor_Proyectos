@@ -28,8 +28,13 @@
   }
   
   ion-img {
-    width: 100%; /* Asegúrate de que la imagen ocupe todo el ancho del contenedor */
-    border-radius: 10px; /* Esquinas redondeadas si es necesario */
+    width: 20%;
+    height: auto;
+    margin-bottom: 1em;
+  }
+  
+  ion-modal {
+    --border-radius: 20px;
   }
   
 
@@ -45,11 +50,16 @@ ion-searchbar {
   --background: white; /* Color de fondo del campo de búsqueda */
 }
   
-  .logo {
-    max-width: 75px;  // Ajusta el tamaño según sea necesario
-    height: auto;
-    display: block;
-    margin-left: 0;  // Alinea el logo a la izquierda
-    margin-right: auto;  // Opcional: Si deseas que el logo no tenga espacio en el lado derecho
-  }
+.logo {
+  max-width: 75px; /* Ajusta el tamaño del logo */
+  height: auto; /* Mantiene la proporción del logo */
+  display: block; /* Comportamiento de bloque */
+  margin: 0 auto; /* Centra horizontalmente */
+}
+
+.custom-modal {
+  --height: 50%;
+  --width: 70%;
+}
+
 

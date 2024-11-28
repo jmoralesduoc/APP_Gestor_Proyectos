@@ -18,8 +18,14 @@ export class ContrasenaPage {
   ) {
     // Inicializa el formulario reactivo con validaciones
     this.resetForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]],
     });
+  }
+
+  // Se llama cuando la vista está a punto de ser cargada
+  ionViewWillEnter() {
+    // Resetea el formulario cuando el usuario entra nuevamente a la pantalla
+    this.resetForm.reset();
   }
 
   // Función para manejar el envío del formulario
@@ -34,7 +40,7 @@ export class ContrasenaPage {
       const toast = await this.toastController.create({
         message: 'Contraseña enviada al Correo Registrado',
         duration: 7000,
-        position: 'bottom'
+        position: 'bottom',
       });
       await toast.present();
 
@@ -45,7 +51,7 @@ export class ContrasenaPage {
       const toast = await this.toastController.create({
         message: 'Por favor, ingrese un correo válido.',
         duration: 3000,
-        position: 'bottom'
+        position: 'bottom',
       });
       await toast.present();
     }

@@ -1,23 +1,45 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ isEditing ? 'Edit Project' : 'New Project' }}</ion-title>
+    <ion-title>Proyectos por Cliente</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <form (ngSubmit)="onSubmit()">
-    <ion-item>
-      <ion-label position="floating">Project Name</ion-label>
-      <ion-input [(ngModel)]="project.name" name="name" type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Description</ion-label>
-      <ion-textarea [(ngModel)]="project.description" name="description"></ion-textarea>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Due Date</ion-label>
-      <ion-datetime [(ngModel)]="project.dueDate" name="dueDate"></ion-datetime>
-    </ion-item>
-    <ion-button expand="full" type="submit">{{ isEditing ? 'Save' : 'Create' }}</ion-button>
-  </form>
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item-group *ngFor="let cliente of clientesConProyectos">
+      <ion-item>
+        <ion-label>
+          <h2>{{ cliente.nombre }}</h2>
+          <p>Proyectos Asignados: {{ cliente.proyectos.length }}</p>
+        </ion-label>
+        <ion-button expand="block" color="success" (click)="crearProyecto(cliente)">
+          Crear Proyecto
+        </ion-button>
+        <ion-button expand="block" color="primary" (click)="toggleProyectos(cliente)">
+          {{ cliente.mostrarProyectos ? 'Ocultar Proyectos' : 'Ver Proyectos' }}
+        </ion-button>
+      </ion-item>
+
+      <!-- Lista de proyectos del cliente -->
+      <ion-list *ngIf="cliente.mostrarProyectos">
+        <ion-item *ngFor="let proyecto of cliente.proyectos">
+          <ion-label>
+            <h3>{{ proyecto.nombre_proyecto }}</h3>
+            <p>{{ proyecto.descripcion }}</p>
+            <p>Fecha Inicio: {{ proyecto.fecha_inicio }}</p>
+            <p *ngIf="proyecto.fecha_fin">Fecha Fin: {{ proyecto.fecha_fin }}</p>
+            <p>Estado: {{ proyecto.estado }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-item-group>
+  </ion-list>
 </ion-content>
+
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" (click)="back()">Volver Atrás</ion-button>
+  </ion-toolbar>
+</ion-footer>

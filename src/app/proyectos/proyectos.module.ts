@@ -1,24 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProyectosPage } from './proyectos.page';
 import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
+
+import { ProyectosPageRoutingModule } from './proyectos-routing.module';
+
+import { ProyectosPage } from './proyectos.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule
+    IonicModule,
+    ProyectosPageRoutingModule
   ],
-  declarations: [ProyectosPage], // Asegúrate de que el componente está declarado
-  exports: [ProyectosPage] // Exporta el componente si es necesario
+  declarations: [ProyectosPage]
 })
 export class ProyectosPageModule {}
-
-
-export interface Project {
-  id: number;
-  name: string;
-  description: string;
-  dueDate: string;
-}

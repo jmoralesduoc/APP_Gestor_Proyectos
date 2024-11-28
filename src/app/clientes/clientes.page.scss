@@ -1,0 +1,22 @@
+ion-item {
+    --inner-padding-top: 0;
+    --inner-padding-bottom: 0;
+    --padding-start: 8px;
+    --padding-end: 8px;
+    margin: 10; /* Elimina márgenes */
+  }
+  
+  ion-avatar {
+    margin-right: 10px; /* Reduce el espacio entre el avatar y el texto */
+  }
+  
+  ion-label {
+    line-height: 1.2; /* Reduce el espacio entre las líneas de texto */
+    font-size: 14px; /* Opcional: ajusta el tamaño de fuente */
+  }
+  
+  ion-buttons {
+    --padding-start: 0;
+    --padding-end: 0;
+  }
+  

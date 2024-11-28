@@ -1,40 +1,43 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <img src="assets/img/logo3.png" alt="Logo" class="logo" />
-  </ion-toolbar>
-</ion-header>
+<ion-header [translucent]="true"></ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <h3 class="login-title">Login</h3>
-    </ion-toolbar>
-  </ion-header>
-
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <ion-item>
-      <ion-label position="floating">Correo Electronico</ion-label>
-      <ion-input formControlName="usuario" type="email"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" formControlName="password"></ion-input>
-    </ion-item>
-
-    <div *ngIf="password?.errors?.['pattern'] && password?.touched">
-      <ion-text color="danger">Password debe tener al menos 4 números, 3 caracteres y 1 letra mayúscula.</ion-text>
-    </div>
-
-    <mat-spinner *ngIf="isLoading" diameter="40"></mat-spinner>
-
+<ion-content 
+  [fullscreen]="true" 
+  style="position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;">
   
-    <ion-button expand="full" class="login-button" type="submit" [disabled]="loginForm.invalid">Login</ion-button>
-  </form>
+  <!-- Imagen de fondo -->
+  <img src="/assets/img/background.png" alt="Background" 
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;" />
 
-  <!-- Colocamos los botones uno al lado del otro dentro de un contenedor -->
-  <div class="button-row">
-    <ion-button class="secondary-button" (click)="irNuevoUsuario()">Nuevo Usuario</ion-button>
-    <ion-button class="secondary-button" (click)="ir_restablecer()">Restablecer contraseña</ion-button>
+  <div style="width: 100%; max-width: 400px; padding: 20px; position: relative; z-index: 1; text-align: center;">
+    <img src="/assets/img/logo3.png" alt="Logo" class="logo" />
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="margin-top: 20px;">
+      <ion-item style="--background: transparent; --border-color: rgba(255, 255, 255, 0.5);">
+        <ion-label position="floating" style="color: rgb(19, 18, 18);">Correo Electronico</ion-label>
+        <ion-input formControlName="usuario" type="email" style="color: rgb(7, 7, 7);"></ion-input>
+      </ion-item>
+
+      <ion-item style="--background: transparent; --border-color: rgba(255, 255, 255, 0.5);">
+        <ion-label position="floating" style="color: rgb(19, 18, 18);">Password</ion-label>
+        <ion-input type="password" formControlName="password" style="color: rgb(12, 12, 12);"></ion-input>
+      </ion-item>
+
+      <div *ngIf="password?.errors?.['pattern'] && password?.touched">
+        <ion-text color="danger">Password debe tener al menos 4 números, 3 caracteres y 1 letra mayúscula.</ion-text>
+      </div>
+     
+      <ion-spinner 
+      *ngIf="isLoading" 
+      name="crescent" 
+      style="margin: 20px auto; display: block; --size: 80px;">
+    </ion-spinner>
+
+      <ion-button expand="full" class="login-button" type="submit" [disabled]="loginForm.invalid">Login</ion-button>
+    </form>
+
+    <div class="button-row">
+      <ion-button class="secondary-button" (click)="irNuevoUsuario()">Nuevo Usuario</ion-button>
+      <ion-button class="secondary-button" (click)="ir_restablecer()">Restablecer contraseña</ion-button>
+    </div>
   </div>
 </ion-content>

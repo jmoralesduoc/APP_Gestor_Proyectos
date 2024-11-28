@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { SQLiteService } from './srv-sqllite.service'; // Import del servicio SQLiteService
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
-
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,8 +22,10 @@ import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
     ReactiveFormsModule,
     IonicStorageModule.forRoot(),
     HttpClientModule,
+    SharedModule,
     BrowserAnimationsModule // Añadido correctamente
   ],
+    
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     SQLiteService,

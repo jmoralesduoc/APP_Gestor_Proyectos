@@ -1,44 +1,42 @@
-/* Estilos para el logo en el header */
+/* ====== Estilos para el Logo en el Header ====== */
 .logo {
-    max-width: 75px;  /* Ajusta el tamaño según sea necesario */
-    height: auto;
-    display: block;
-    margin: 0 left;  /* Centra el logo horizontalmente */
-  }
-  
-  /* Estilos para el título de login */
-.login-title {
-    color: #ffffff; /* Color blanco */
-    font-weight: bold; /* Negrita */
-    font-size: 1.8rem; /* Tamaño de fuente */
-    text-align: center; /* Centra el título */
-    margin: 0; /* Quitar márgenes */
-  }
-  
-  /* Estilos para los botones */
-.login-button, .secondary-button {
-    --background: #f8c231; /* Mismo color para todos los botones */
-    --color: #000000; /* Texto negro */
-    --border-radius: 12px; /* Borde redondeado */
-    font-size: 1.2rem; /* Tamaño de texto */
-    padding: 12px; /* Espacio interno */
-    margin-top: 20px; /* Margen superior */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
-  }
-  
-  /* Estilos para la fila de botones */
-.button-row {
-    display: flex;
-    justify-content: space-between; /* Coloca los botones uno al lado del otro con espacio entre ellos */
-    margin-top: 20px;
-  }
-  
+  max-width: 75px; /* Ajusta el tamaño del logo */
+  height: auto; /* Mantiene la proporción del logo */
+  display: block; /* Comportamiento de bloque */
+  margin: 0 auto; /* Centra horizontalmente */
+}
+
+/* ====== Estilos para los Botones ====== */
 .secondary-button {
-    flex: 1;
-    margin-right: 10px; /* Espacio entre los dos botones */
-  }
-  
-.secondary-button:last-child {
-    margin-right: 0; /* Elimina el margen derecho del último botón */
-  }
-  
+  --background: #f8c231; /* Fondo amarillo */
+  --color: black; /* Texto negro */
+  --border-radius: 12px; /* Bordes redondeados */
+  font-size: 1.2rem; /* Tamaño del texto */
+  padding: 12px; /* Espaciado interno */
+  margin-top: 10px; /* Margen superior */
+  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para relieve */
+}
+
+/* ====== Lista de Opciones ====== */
+ion-list {
+  background: transparent; /* Fondo transparente */
+  border-radius: 12px; /* Bordes redondeados */
+  padding: 10px; /* Espaciado interno */
+}
+
+/* ====== Estilos para el Footer ====== */
+ion-footer ion-toolbar {
+  background: transparent; /* Fondo transparente del footer */
+}
+
+/* ====== Ajustes Visuales ====== */
+ion-item {
+  --background: transparent; /* Fondo transparente */
+  --border-color: rgba(255, 255, 255, 0.5); /* Borde blanco translúcido */
+  color: rgb(15, 15, 15); /* Texto blanco */
+}
+
+ion-label {
+  color: rgb(10, 10, 10); /* Texto blanco */
+}

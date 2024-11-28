@@ -1,45 +1,55 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Registro Nuevo Usuario</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header [translucent]="true"></ion-header>
 
-<ion-content [fullscreen]="true">
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" id="registerForm">
-    <ion-item>
-      <ion-label position="floating">Nombres</ion-label>
-      <ion-input type="text" formControlName="nombres"></ion-input>
-    </ion-item>
+<ion-content 
+  [fullscreen]="true" 
+  style="position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+  
+  <!-- Imagen de fondo -->
+  <img src="/assets/img/background.png" alt="Background" 
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;" />
 
-    <ion-item>
-      <ion-label position="floating">Apellidos</ion-label>
-      <ion-input type="text" formControlName="apellidos"></ion-input>
-    </ion-item>
+  <div style="width: 100%; max-width: 400px; padding: 20px; position: relative; z-index: 1; text-align: center;">
+    <img src="/assets/img/logo3.png" alt="Logo" class="logo" />
 
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" formControlName="email"></ion-input>
-    </ion-item>
-    <ion-note *ngIf="registerForm?.get('email')?.hasError('required') && registerForm?.get('email')?.touched">
-      El email es requerido
-    </ion-note>
+    <h1 style="color: rgb(7, 7, 7); margin-bottom: 20px;">Registro Nuevo Usuario</h1>
 
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" formControlName="password"></ion-input>
-    </ion-item>
-    <ion-note *ngIf="registerForm?.get('password')?.hasError('required') && registerForm?.get('password')?.touched">
-      La contraseña es requerida
-    </ion-note>
-    <ion-note *ngIf="registerForm?.get('password')?.hasError('pattern') && registerForm?.get('password')?.touched">
-      La contraseña debe tener al menos 8 caracteres, 4 dígitos, 3 caracteres  y 1 letra mayúscula.
-    </ion-note>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" style="margin-top: 20px;">
+      <ion-item style="--background: transparent; --border-color: rgba(255, 255, 255, 0.5); margin-bottom: 16px;">
+        <ion-label position="floating" style="color: rgb(20, 20, 20);">Nombres</ion-label>
+        <ion-input type="text" formControlName="nombres" style="color: rgb(17, 16, 16);"></ion-input>
+      </ion-item>
 
-    <ion-button type="submit" [disabled]="registerForm.invalid">
+      <ion-item style="--background: transparent; --border-color: rgba(255, 255, 255, 0.5); margin-bottom: 16px;">
+        <ion-label position="floating" style="color: rgb(17, 17, 17);">Apellidos</ion-label>
+        <ion-input type="text" formControlName="apellidos" style="color: rgb(19, 18, 18);"></ion-input>
+      </ion-item>
 
-      Registrarse
-    </ion-button>
+      <ion-item style="--background: transparent; --border-color: rgba(255, 255, 255, 0.5); margin-bottom: 16px;">
+        <ion-label position="floating" style="color: rgb(8, 8, 8);">Email</ion-label>
+        <ion-input type="email" formControlName="email" style="color: rgb(14, 13, 13);"></ion-input>
+      </ion-item>
+      <ion-note *ngIf="registerForm?.get('email')?.hasError('required') && registerForm?.get('email')?.touched" style="color: red;">
+        El email es requerido
+      </ion-note>
 
-    <ion-button color="danger" (click)="logout()">Cancelar</ion-button>
-  </form>
+      <ion-item style="--background: transparent; --border-color: rgba(255, 255, 255, 0.5); margin-bottom: 16px;">
+        <ion-label position="floating" style="color: rgb(15, 15, 15);">Password</ion-label>
+        <ion-input type="password" formControlName="password" style="color: rgb(5, 5, 5);"></ion-input>
+      </ion-item>
+      <ion-note *ngIf="registerForm?.get('password')?.hasError('required') && registerForm?.get('password')?.touched" style="color: red;">
+        La contraseña es requerida
+      </ion-note>
+      <ion-note *ngIf="registerForm?.get('password')?.hasError('pattern') && registerForm?.get('password')?.touched" style="color: red;">
+        La contraseña debe tener al menos 8 caracteres, 4 dígitos, 3 caracteres y 1 letra mayúscula.
+      </ion-note>
+
+      <ion-button expand="full" type="submit" [disabled]="registerForm.invalid" style="margin-top: 20px;">
+        Registrarse
+      </ion-button>
+
+      <ion-button expand="full" color="danger" (click)="logout()" style="margin-top: 10px;">
+        Cancelar
+      </ion-button>
+    </form>
+  </div>
 </ion-content>
