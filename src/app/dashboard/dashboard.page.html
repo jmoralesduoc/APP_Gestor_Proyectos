@@ -14,6 +14,11 @@
 </ion-header>
 
 <ion-content>
+  <!-- Componente del clima -->
+  <div style="margin: 20px 0; text-align: center;">
+    <app-apiclima></app-apiclima>
+  </div>
+
   <div>
     <ion-list>
       <ion-item *ngFor="let client of filteredClients">
@@ -40,8 +45,6 @@
       </ion-item>
     </ion-list>
   </div>
-  
-
 
   <!-- Modal -->
   <ion-modal [isOpen]="isModalOpen" #modal trigger="modal-trigger" cssClass="custom-modal">
